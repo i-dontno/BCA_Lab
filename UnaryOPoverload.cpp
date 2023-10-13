@@ -1,44 +1,33 @@
-// Overload ++ when used as prefix and postfix
-
 #include <iostream>
-using namespace std;
 
-class Count {
-   private:
+class MyNumber {
+private:
     int value;
 
-   public:
+public:
+    MyNumber(int val) : value(val) {}
 
-    // Constructor to initialize count to 5
-    Count() : value(5) {}
-
-
-    // Overload ++ when used as prefix
-    void operator ++ () {
+    // Overload the pre-increment operator
+    MyNumber& operator++() {
+        // Increment the value
         ++value;
+        return *this;
     }
 
-
-    // Overload ++ when used as postfix
-    void operator ++ (int) {
-        value++;
-    }
-
-    void display() {
-        cout << "Count: " << value << endl;
+    int getValue() {
+        return value;
     }
 };
 
 int main() {
-    Count count1;
+    MyNumber num(5);
 
-    // Call the "void operator ++ (int)" function
-    count1++;
-    count1.display();
+    std::cout << "Original value: " << num.getValue() << std::endl;
 
-    // Call the "void operator ++ ()" function
-    ++count1;
+    // Use the overloaded pre-increment operator
+    ++num;
 
-    count1.display();
+    std::cout << "After pre-increment: " << num.getValue() << std::endl;
+
     return 0;
 }
